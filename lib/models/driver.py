@@ -35,4 +35,16 @@ class Driver:
             self._driver_role = driver_role
         else:
             raise ValueError("driver_role must be a non-empty string")
+        
+    @property
+    def team_id(self):
+        return self._team_id
+
+    @team_id.setter
+    def team_id(self, team_id):
+        if type(team_id) is int and Team.find_by_id(team_id):
+            self._team_id = team_id
+        else:
+            raise ValueError(
+                "team_id must reference a team in the database")
     
