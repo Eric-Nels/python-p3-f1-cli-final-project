@@ -73,4 +73,45 @@ class Driver:
         """
         CURSOR.execute(sql)
         CONN.commit()
+
+    def save(self):
+        """ Insert a new row with the name, driver role, and team id values of the current Driver object.
+        Update object id attribute using the primary key value of the new row.
+        Save the object in the local dictionary using the table row's PK as the dictionary key"""
+        sql = """
+                INSERT INTO drivers (name, driver_role, team_id)
+                VALUES (?, ?, ?)
+        """
+
+        CURSOR.execute(sql, (self.name, self.driver_role, self.team_id))
+        CONN.commit()
+
+        self.id = CURSOR.lastrowid
+        type(self).all[self.id] = self
+
+    def update(self):
+        """Update the table row corresponding to the current Driver instance."""
+        sql = """
+            UPDATE drivers
+            SET name = ?, driver_role = ?, team_id = ?
+            WHERE id = ?
+        """
+        CURSOR.execute(sql, (self.name, self.driver_role, self.team_id, self.id))
+        CONN.commit()
+
+    def delete(self):
+        """Delete the table row corresponding to the current Driver instance,
+        delete the dictionary entry, and reassign the id attribute"""
+
+        sql = """
+            DELETE FROM drivers
+            WHERE id = ?
+        """
+
+        CURSOR.execute(sql, (self.id,))
+        CONN.commit()
+
+        del type(self).all[self.id]
+
+        self.id = None
     
