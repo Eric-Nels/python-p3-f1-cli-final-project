@@ -65,10 +65,21 @@ def delete_driver():
         print(f'Driver {name} not found')
 
 def list_drivers():
-    pass
+    drivers = Driver.get_all()
+    for driver in drivers:
+        print(driver)
 
 def list_driver_team():
-    pass
+    name = input("Enter the driver's name: ")
+    driver = Driver.find_by_name(name)
+    teams = Team.get_all()
+    for team in teams:
+        if team.id == driver.team_id:
+            print(f'{driver.name}, {team.name}')
 
 def find_drivers_by_team_id():
-    pass
+    id_ = input("Enter the team's id: ")
+    drivers = Driver.get_all()
+    for driver in drivers:
+        if driver.team_id == int(id_):
+            print(driver.name, driver.driver_role)
