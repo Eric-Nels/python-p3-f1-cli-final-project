@@ -45,10 +45,24 @@ def find_team_by_location():
             print(team.name)
 
 def create_driver():
-    pass
+    name = input("Enter the driver's name: ")
+    driver_role = input("Enter the driver's role: ")
+    team_name = input("Enter the driver's team: ")
+    team = Team.find_by_name(team_name)
+    team_id = team.id
+    try:
+        driver = Driver.create(name, driver_role, team_id)
+        print(f'Success: {driver}')
+    except Exception as exc:
+        print("Error creating driver: ", exc)
 
 def delete_driver():
-    pass
+    name = input("Enter the driver's name: ")
+    if driver := Driver.find_by_name(name):
+        driver.delete()
+        print(f'Driver {name} deleted')
+    else:
+        print(f'Driver {name} not found')
 
 def list_drivers():
     pass
