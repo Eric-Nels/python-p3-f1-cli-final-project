@@ -24,7 +24,9 @@ def delete_team():
         print(f'Team {id_} not found')
 
 def list_teams():
-    pass
+    teams = Team.get_all()
+    for team in teams:
+        print(team)
 
 def list_team_drivers():
     pass
