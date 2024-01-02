@@ -1,3 +1,6 @@
+from models.__init__ import CURSOR, CONN
+from models.team import Team
+
 class Driver:
 
     all = {}
@@ -47,4 +50,18 @@ class Driver:
         else:
             raise ValueError(
                 "team_id must reference a team in the database")
+
+    @classmethod
+    def create_table(cls):
+        """ Create a new table to persist the attributes of Driver instances """
+        sql = """
+            CREATE TABLE IF NOT EXISTS drivers (
+            id INTEGER PRIMARY KEY,
+            name TEXT,
+            driver_role TEXT,
+            team_id INTEGER,
+            FOREIGN KEY (team_id) REFERENCES teams(id))
+        """
+        CURSOR.execute(sql)
+        CONN.commit()
     
