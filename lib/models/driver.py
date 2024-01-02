@@ -114,4 +114,11 @@ class Driver:
         del type(self).all[self.id]
 
         self.id = None
+
+    @classmethod
+    def create(cls, name, driver_role, team_id):
+        """ Initialize a new Driver instance and save the object to the database """
+        driver = cls(name, driver_role, team_id)
+        driver.save()
+        return driver
     
