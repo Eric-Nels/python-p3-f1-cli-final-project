@@ -1,11 +1,19 @@
 # lib/helpers.py
+from models.driver import Driver
+from models.team import Team
 
 def exit_program():
     print("Goodbye!")
     exit()
 
 def create_team():
-    pass
+    name = input("Enter the Team's name: ")
+    location = input("Enter the Team's location: ")
+    try:
+        team = Team.create(name, location)
+        print(f'Success: {team}')
+    except Exception as exc:
+        print("Error creating team: ", exc)
 
 def delete_team():
     pass
