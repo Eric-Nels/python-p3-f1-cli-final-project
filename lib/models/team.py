@@ -70,3 +70,36 @@ class Team:
 
         self.id = CURSOR.lastrowid
         type(self).all[self.id] = self
+
+    @classmethod
+    def create(cls, name, location):
+        """ Initialize a new Team instance and save the object to the database """
+        team = cls(name, location)
+        team.save()
+        return team
+    
+    def update(self):
+        """Update the table row corresponding to the current Team instance."""
+        sql = """
+            UPDATE teams
+            SET name = ?, location = ?
+            WHERE id = ?
+        """
+        CURSOR.execute(sql, (self.name, self.location, self.id))
+        CONN.commit()
+
+    def delete(self):
+        """Delete the table row corresponding to the current Team instance,
+        delete the dictionary entry, and reassign id attribute"""
+
+        sql = """
+            DELETE FROM teams
+            WHERE id = ?
+        """
+
+        CURSOR.execute(sql, (self.id,))
+        CONN.commit()
+
+        del type(self).all[self.id]
+
+        self.id = None
