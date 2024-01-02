@@ -1,3 +1,5 @@
+from models.__init__ import CURSOR, CONN
+
 class Team:
     all = {}
 
@@ -19,3 +21,16 @@ class Team:
             self._name = name
         else:
             raise ValueError("Name must be non-empty string")
+        
+    @property
+    def location(self):
+        return self._location
+
+    @location.setter
+    def location(self, location):
+        if isinstance(location, str) and len(location):
+            self._location = location
+        else:
+            raise ValueError(
+                "Location must be a non-empty string"
+            )
