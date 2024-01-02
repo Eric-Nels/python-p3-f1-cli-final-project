@@ -29,7 +29,13 @@ def list_teams():
         print(team)
 
 def list_team_drivers():
-    pass
+    team_name = input("Enter the Team name: ")
+    team = Team.find_by_name(team_name)
+    team_id = team.id
+    drivers = Driver.get_all()
+    for driver in drivers:
+        if driver.team_id == team_id:
+            print(driver.name, driver.driver_role)
 
 def find_team_by_location():
     pass
