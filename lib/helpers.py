@@ -38,7 +38,11 @@ def list_team_drivers():
             print(driver.name, driver.driver_role)
 
 def find_team_by_location():
-    pass
+    location = input("Enter the location: ")
+    teams = Team.get_all()
+    for team in teams:
+        if team.location == location:
+            print(team.name)
 
 def create_driver():
     pass
