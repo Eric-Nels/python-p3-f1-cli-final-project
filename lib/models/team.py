@@ -5,3 +5,6 @@ class Team:
         self.id = id
         self.name = name
         self.location = location
+
+    def __repr__(self):
+        return f"<Team {self.id}: {self.name}, {self.location}>"
