@@ -24,4 +24,15 @@ class Driver:
             self._name = name
         else:
             raise ValueError("Name must be a non-empty string")
+        
+    @property
+    def driver_role(self):
+        return self._driver_role
+
+    @driver_role.setter
+    def driver_role(self, driver_role):
+        if isinstance(driver_role, str) and len(driver_role):
+            self._driver_role = driver_role
+        else:
+            raise ValueError("driver_role must be a non-empty string")
     
