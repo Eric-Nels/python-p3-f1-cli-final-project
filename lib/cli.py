@@ -22,7 +22,25 @@ def main():
         if choice == "0":
             exit_program()
         elif choice == "1":
-            helper_1()
+            create_team()
+        elif choice == "2":
+            delete_team()
+        elif choice == "3":
+            list_teams()
+        elif choice == "4":
+            list_team_drivers()
+        elif choice == "5":
+            find_team_by_location()
+        elif choice == "6":
+            create_driver()
+        elif choice == "7":
+            delete_driver()
+        elif choice == "8":
+            list_drivers()
+        elif choice == "9":
+            list_driver_team()
+        elif choice == "10":
+            find_drivers_by_team_id()
         else:
             print("Invalid choice")
 
