@@ -64,4 +64,13 @@ class Driver:
         """
         CURSOR.execute(sql)
         CONN.commit()
+
+    @classmethod
+    def drop_table(cls):
+        """ Drop the table that persists Driver instances """
+        sql = """
+            DROP TABLE IF EXISTS drivers;
+        """
+        CURSOR.execute(sql)
+        CONN.commit()
     
