@@ -20,8 +20,16 @@ def main():
 
 def menu():
     print("Please select an option:")
-    print("0. Exit the program")
-    print("1. Some useful function")
+    print("1. Create a Team")
+    print("2. Delete a Team")
+    print("3. Display all Teams")
+    print("4. View Team drivers")
+    print("5. Find Teams by location")
+    print("6. Create a Driver")
+    print("7. Delete a Driver")
+    print("8. Display all Driver")
+    print("9. View Drivers Team")
+    print("10. Find Drivers by Team")
 
 
 if __name__ == "__main__":
