@@ -122,3 +122,53 @@ class Driver:
         driver.save()
         return driver
     
+    @classmethod
+    def instance_from_db(cls, row):
+        """Return a Driver object having the attribute values from the table row."""
+        driver = cls.all.get(row[0])
+        if driver:
+            driver.name = row[1]
+            driver.driver_role = row[2]
+            driver.team_id = row[3]
+        else:
+            driver = cls(row[1], row[2], row[3])
+            driver.id = row[0]
+            cls.all[driver.id] = driver
+        return driver
+    
+    @classmethod
+    def get_all(cls):
+        """Return a list containing one Driver object per table row"""
+        sql = """
+            SELECT *
+            FROM drivers
+        """
+
+        rows = CURSOR.execute(sql).fetchall()
+
+        return [cls.instance_from_db(row) for row in rows]
+
+    @classmethod
+    def find_by_id(cls, id):
+        """Return Driver object corresponding to the table row matching the specified primary key"""
+        sql = """
+            SELECT *
+            FROM drivers
+            WHERE id = ?
+        """
+
+        row = CURSOR.execute(sql, (id,)).fetchone()
+        return cls.instance_from_db(row) if row else None
+
+    @classmethod
+    def find_by_name(cls, name):
+        """Return Driver object corresponding to the first table row matching the specified name"""
+        sql = """
+            SELECT *
+            FROM drivers
+            WHERE name is ?
+        """
+
+        row = CURSOR.execute(sql, (name,)).fetchone()
+        return cls.instance_from_db(row) if row else None
+    
