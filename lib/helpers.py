@@ -16,7 +16,12 @@ def create_team():
         print("Error creating team: ", exc)
 
 def delete_team():
-    pass
+    id_ = input("Enter the team's id: ")
+    if team := Team.find_by_id(id_):
+        team.delete()
+        print(f'Team {id_} deleted')
+    else:
+        print(f'Team {id_} not found')
 
 def list_teams():
     pass
