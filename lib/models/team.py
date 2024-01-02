@@ -34,3 +34,24 @@ class Team:
             raise ValueError(
                 "Location must be a non-empty string"
             )
+        
+    @classmethod
+    def create_table(cls):
+        """ Create a new table to persist the attributes of Team instances """
+        sql = """
+            CREATE TABLE IF NOT EXISTS teams (
+            id INTEGER PRIMARY KEY,
+            name TEXT,
+            location TEXT)
+        """
+        CURSOR.execute(sql)
+        CONN.commit()    
+
+    @classmethod
+    def drop_table(cls):
+        """ Drop the table that persists Team instances """
+        sql = """
+            DROP TABLE IF EXISTS teams;
+        """
+        CURSOR.execute(sql)
+        CONN.commit()
