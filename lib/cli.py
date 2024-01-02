@@ -20,6 +20,7 @@ def main():
 
 def menu():
     print("Please select an option:")
+    print("0. Exit the program")
     print("1. Create a Team")
     print("2. Delete a Team")
     print("3. Display all Teams")
